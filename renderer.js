@@ -5,6 +5,13 @@
 // selectively enable features needed in the rendering
 // process.
 
+const { ipcRenderer } = require("electron")
+
 window.addEventListener('DOMContentLoaded', () => {
-    document.getElementById("node-version").innerHTML = process.versions.node + "-----"
+    document.querySelector("#btn").addEventListener("click", () => [
+        ipcRenderer.send("message", "hello !")
+    ]);
+    ipcRenderer.on("reply", (event, msg) => {
+        console.log(msg);
+    })
 })
